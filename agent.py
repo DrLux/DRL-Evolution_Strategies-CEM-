@@ -10,9 +10,9 @@ class population(object):
     def __init__(self,env,num_agents):
         self.env = env
         self.population = []
-        self.num_evaluation_run = 4 
+        self.num_evaluation_run = 5 
         self.num_agents = num_agents
-        self.max_steps_per_episode = 500
+        self.max_steps_per_episode = 100
         self.init_population()
         
         # The best of his generation
