@@ -2,17 +2,15 @@ import numpy as np
 import tensorflow as tf
 from tensorflow.contrib.layers import fully_connected
 
-class policy(object):
+class policy_network(object):
 
     def __init__(self,obs_dim,ac_dim,discrete):
         self.obs_dim = obs_dim
         self.ac_dim = ac_dim
         self.discrete = discrete
-
-        #aggiungerlo nella relazione
+        
         n_layers = 2
         size = 64 #dimension of the hidden layer
-
 
         #define placeholder
         self.sy_ob_no = tf.placeholder(shape=[None, obs_dim], name="ob", dtype=tf.float32)
@@ -116,7 +114,7 @@ class policy(object):
         #return as [1], we need to remove the []
         return action[0]
 
-
+    '''
     # Add gaussian noise to the network parameters
     def mutate(self):
         
@@ -128,4 +126,12 @@ class policy(object):
         for i in range(len(variables)):
             # Create a vector of random noise with the same shape as each variables and add to it
             variables[i].assign_add(tf.random_normal(tf.shape(variables[i]),mean=0.0,stddev=1.0,dtype=tf.float32) * mutation_power)
-            
+    '''        
+
+    def get_weights(self):
+        variables = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES)
+        weights = []
+        for v in variables:
+            weights.append(v.eval(session=self.sess))
+
+        return weights
