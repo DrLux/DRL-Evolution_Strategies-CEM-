@@ -1,1 +1,1 @@
-GA-DRL
+Reinforcement Learning with Cross Entropy Method
